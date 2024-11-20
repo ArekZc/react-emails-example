@@ -1,10 +1,21 @@
 import { renderToString } from 'react-dom/server';
 import nodemailer from 'nodemailer';
 
-import { InviteEmailTemplate, previewProps } from './emails/InviteEmail.tsx';
+import { InviteEmailTemplate } from './emails/InviteEmail';
+
+      const email = renderToString(
+        <InviteEmailTemplate
+          username="Bob"
+          userImage="🦸"
+          invitedByUsername="Arthur"
+          invitedByEmail="arthur@kingarthur.com"
+          teamName="Arthur"
+          teamImage="⚔️"
+          inviteLink="https://kingarthur.com/invite"
+        />
+      );
 
 (async () => {
-  const html = renderToString(<InviteEmailTemplate />);
   const transport = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
@@ -19,6 +30,8 @@ import { InviteEmailTemplate, previewProps } from './emails/InviteEmail.tsx';
     from: 'penguin@joker.us',
     to: 'bruce@wayneinc.com',
     subject: 'Did you get that thing I sent you?',
-    html,
+    html: email,
   });
+
+
 })();

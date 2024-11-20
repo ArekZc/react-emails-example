@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface InviteUserEmailProps {
   username?: string;
   userImage?: string;
@@ -12,19 +14,85 @@ interface InviteUserEmailProps {
 
 const baseUrl = 'https://jsx.email/assets/demo/';
 
-export const previewProps = {
-  username: 'batman',
-  userImage: `${baseUrl}batman-adam.jpg`,
-  invitedByUsername: 'joker',
-  invitedByEmail: 'joker@arkham.com',
-  teamName: 'Batmobile',
-  teamImage: `${baseUrl}vercel-team.png`,
-  inviteLink: 'https://vercel.com/teams/invite/foo',
-  inviteFromIp: '123.45.678.910',
-  inviteFromLocation: 'Gotham City',
-} as InviteUserEmailProps;
-
 export const templateName = 'Invite User';
+
+export const styles: Record<string, React.CSSProperties> = {
+  body: {
+    margin: 'auto',
+    backgroundColor: '#FFF'
+  },
+  main: {
+    margin: '40px auto 40px',
+    width: '465px',
+    padding: '20px',
+    backgroundColor: 'whitesmoke',
+    borderTopWidth: '1px',
+    borderBottomWidth: '0px',
+    borderRadius: '.25rem',
+    borderWidth: '1px',
+    borderColor: '#eaeaea'
+  },
+  topSection: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: '32px'
+  },
+  logo: {
+    margin: '0 auto',
+    width: '60px',
+    height: '60px',
+    fontSize: '48px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  header: {
+    margin: '30px 0',
+    textAlign: 'center',
+    fontSize: '24px'
+  },
+  text: {
+    fontSize: '14px',
+    lineHeight: '24px'
+  },
+  link: {
+    textDecorationLine: 'none',
+    color: 'rgb(37 99 235)'
+  },
+  transfer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    gap: '12px',
+    justifyContent: 'center'
+  },
+  circle: {
+    borderRadius: '9999px',
+    width: '64px',
+    height: '64px',
+    backgroundColor: '#eaeaea',
+    fontSize: '42px',
+    display: 'flex',
+    lineHeight: '22px',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  invite: {
+    margin: '32px 0',
+    textAlign: 'center'
+  },
+  inviteButton: {
+    backgroundColor: '#000',
+    color: '#fff',
+    padding: '16px 12px',
+    textDecoration: 'none'
+  },
+  separator: {
+    margin: '0 26px',
+    width: '100%',
+    border: '1px solid #eaeaea'
+  }
+}
 
 export const InviteEmailTemplate = ({
   username,
@@ -34,51 +102,40 @@ export const InviteEmailTemplate = ({
   teamName,
   teamImage,
   inviteLink,
-  inviteFromIp,
-  inviteFromLocation,
 }: InviteUserEmailProps) => {
   return (
     <html>
       <head />
-      <body className="mx-auto my-auto bg-white font-sans">
-        <main className="mx-auto my-[40px] w-[465px] border-separate rounded border border-solid border-[#eaeaea] p-[20px]">
-          <section className="mt-[32px]">
-            <img
-              src={`${baseUrl}vercel-logo.png`}
-              width="40"
-              height="37"
-              alt="Vercel"
-              className="mx-auto my-0"
-            />
+      <body style={styles.body}>
+        <main style={styles.main}>
+          <section style={styles.topSection}>
+            <div style={styles.logo}>🧙‍♂️</div>
           </section>
-          <header className="mx-0 my-[30px] p-0 text-center text-[24px] font-normal text-black">
-            Join <strong>{teamName}</strong> on <strong>CompanyName</strong>
+          <header style={styles.header}>
+            Join <strong>{teamName}</strong> on <strong>Merlin Academy</strong>
           </header>
-          <p className="text-[14px] leading-[24px] text-black">
+          <p style={styles.text}>
             Hello {username},
           </p>
-          <p className="text-[14px] leading-[24px] text-black">
+          <p style={styles.text}>
             <strong>{invitedByUsername}</strong> (
             <a
               href={`mailto:${invitedByEmail}`}
-              className="text-blue-600 no-underline"
+              style={styles.link}
             >
               {invitedByEmail}
             </a>
             ) has invited you to the <strong>{teamName}</strong> team on{' '}
-            <strong>CompanyName</strong>.
+            <strong>Merlin Academy</strong>.
           </p>
           <section>
-            <div className="flex flex-wrap">
-              <div className="flex-1">
-                <img
-                  className="rounded-full"
-                  src={userImage}
-                  width="64"
-                  height="64"
-                />
+            <div style={styles.transfer}>
+              <div>
+                <div
+                  style={{...styles.circle, backgroundColor: 'lightseagreen'}}
+                >{userImage}</div>
               </div>
-              <div className="flex-1">
+              <div>
                 <img
                   src={`${baseUrl}vercel-arrow.png`}
                   width="12"
@@ -86,33 +143,27 @@ export const InviteEmailTemplate = ({
                   alt="invited you to"
                 />
               </div>
-              <div className="flex-1">
-                <img
-                  className="rounded-full"
-                  src={teamImage}
-                  width="64"
-                  height="64"
-                />
+              <div>
+                <div
+                  style={{...styles.circle, backgroundColor: 'lightblue' }}>{teamImage}</div>
               </div>
             </div>
           </section>
-          <section className="mb-[32px] mt-[32px] text-center">
-            <a className="" href={inviteLink}>
+          <section style={styles.invite}>
+            <a style={styles.inviteButton} href={inviteLink}>
               Join the team
             </a>
           </section>
-          <p className="!text-[14px] leading-[24px] text-black">
+          <p style={styles.text}>
             or copy and paste this URL into your browser:{' '}
-            <a href={inviteLink} className="text-blue-600 no-underline">
+            <a href={inviteLink} style={styles.link}>
               {inviteLink}
             </a>
           </p>
-          <hr className="mx-0 my-[26px] w-full border border-solid border-[#eaeaea]" />
-          <p className="!text-[12px] leading-[24px] text-[#666666]">
+          <hr style={styles.separator} />
+          <p style={styles.text}>
             This invitation was intended for{' '}
-            <span className="text-black">{username} </span>.This invite was sent
-            from <span className="text-black">{inviteFromIp}</span> located in{' '}
-            <span className="text-black">{inviteFromLocation}</span>. If you
+            <strong>{username} </strong>. If you
             were not expecting this invitation, you can ignore this email. If
             you are concerned about your account's safety, please reply to this
             email to get in touch with us.
